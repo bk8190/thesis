@@ -1,24 +1,40 @@
-The Kinect was designed to track skeletons from a fixed vantage point (in front of a television.)
+The Kinect has several disadvantages that had to be overcome.  The Kinect has a limited field of view (57 degrees).  The Kinect was designed to track users from a fixed vantage point.  The Kinect is sensitive to vibration.  The Kinect does not work well in direct sunlight (vibration)
+
+
 
 The Kinect has a field of view of 57 degrees.  While this is sufficient for tracking a target with limited freedom from a fixed vantage point, it shows weaknesses for moving targets.
 
-Even following a target down a straignt hall
+When using the Kinect as the sole source of observation, the robot must constantly face the user (within +- 30 degrees) or lose a target lock.  This puts severe constraints on its ability to maneuver and plan paths.
+
+Even following a target down a straignt hall one can run into problems.  If an obstacle appears between the user and the robot, the robot will have to navigate around the obstacle. (INSERT IMAGE HERE OF ROBOT AVOIDING OBSTACLE, INCLUDING TANGENT ANGLE DEVIATION FROM STRAIGHT PATH) Likely, as part of the avoidance the user will leave the Kinect's field of view, leading to a target loss.  When the robot once again faces the user, it will have to re-find the user.
+
+The situation becomes worse when the user takes a twisting path, especially doubling back behind the robot.
+
+Reversing is especially problematic in tight hallways, because the Kinect cannot track targets closer than two feet.  In this way, the robot can get stuck against a wall with no hope of recovery.
 
 
 
 
-The Kinect was not meant to be mounted on a moving base.
+
+
+The Kinect was designed to track skeletons from a fixed vantage point (in front of a television.)
+The Kinect was not meant to be mounted on a moving base.  I performed some characterization to determine how well the Kinect can track moving targets from a moving vantage point
+
+I hypothesize that the Kinect has a reliance on background subtraction. 
 
 a smoothing factor (one of the few user accessable parameters)
 
+The Kinect is interfaced through OpenNI (Open Natural Interraction) drivers which provide an open-source API.  However, the skeleton tracking itself is done in a closed source binary (NITE, made by PrimeSense.)  Therefore little can be done to improve the dropout rate on moving targets.
 
 
 
-
+Harlie's Kinect was mounted in such a way that it cannot see legs (INSERT MECHANICAL DRAWING OF KINECT'S FOV) close up.  Luckily, the NITE software can be commanded to ignore legs and just track the target's upper torso.  The problem is that without legs, the tracking software loses an important characteristic that can discriminate people from inanimate objects.
 
 The Kinect has no built-in facilities for discriminating between users.
 
 If a user exits the scene, there is no guarantee that when the user is re-detected that user will be assigned the same ID.
+
+Upon reacquiring a user, it will have to recalibrate for that user.  The calibration step can be skipped, and 
 
 
 
