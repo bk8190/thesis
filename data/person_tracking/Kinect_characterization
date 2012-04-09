@@ -1,0 +1,26 @@
+The Kinect was designed to track skeletons from a fixed vantage point (in front of a television.)
+
+The Kinect has a field of view of 57 degrees.  While this is sufficient for tracking a target with limited freedom from a fixed vantage point, it shows weaknesses for moving targets.
+
+Even following a target down a straignt hall
+
+
+
+
+The Kinect was not meant to be mounted on a moving base.
+
+a smoothing factor (one of the few user accessable parameters)
+
+
+
+
+
+
+The Kinect has no built-in facilities for discriminating between users.
+
+If a user exits the scene, there is no guarantee that when the user is re-detected that user will be assigned the same ID.
+
+
+
+
+back and forth through 1 radian (approximately the Kinect's field of view) with a sinusoidal velocity profile and a top speed of 0.8 rad/sec (46 degrees/second).
