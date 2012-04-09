@@ -1,0 +1,38 @@
+When the target is stationary OpenNI works very well, very robust
+
+At .2 rad/sec just as robust
+- Command constant spin, walk around the robot, experiment with moving in and out but staying in field of view
+- Give a step command by engaging/disengaging E-stop
+- Works very well, just as good as stationary
+
+
+.3 m/s - performane degrades
+- Does good job of tracking a person that keeps pace with the robot
+- Confused by step commands 50% of the time
+- Often loses targets standing still - often lost for 1-2 frames and then reacquired
+- Performs worse for targets >1.5m away
+
+
+
+http://www.iheartrobotics.com/2010/12/limitations-of-kinect.htmlet i
+
+
+If a target keeps pace with the camera, moving to stay in front of the robot, lockon is maintained even at high speeds
+
+
+
+- Closer than 60cm, Kinect does not work
+
+
+
+
+Rotated robot around 1 radian (57 deg, approx Kinect FOV) sin wave, top speed .8 rad/sec
+- No dropouts when the target is stationary in view
+- Many dropouts when the target starts to move, especially counter to rotation
+- Target flickers at higher speeds
+- Usually target is reacquired, but often as a different player ID
+- Performs worse for targets farther away
+
+
+- Many dropouts when target goes behind object like chair
+- Consistent with background subtraction - moving objects are harder to segment
