@@ -2,9 +2,6 @@ The Kinect has several disadvantages that had to be overcome, largely due to the
 
 The Kinect is accessed through an open-source API called OpenNI (Open Natural Interraction).  However, the actual skeleton tracking is done by a closed-source binary (NITE, made by PrimeSense.)  NITE provides few options for configuration, so at times software workarounds had to be employed.
 
-
-
-
 CALIBRATION
 
 By default, whenever OpenNI detects a new user in its field of view it requires the user to stand in a calibration pose [PICTURE] to take an accurate measure of the user's limbs.  This calibration step takes several seconds and requires the target to be still.
@@ -13,30 +10,15 @@ When the Kinect is on a moving base, occasionally the target will be lost due to
 
 Skipping calibration comes at a cost.  A positive aspect of the calibration step is that the distinctive pose required for calibration eliminates the problem of the robot following the wrong user.  Without calibration, the robot no longer has an easy way of telling which user to follow.  Additionally, when on a moving base, the Kinect tends to detect chairs as users.  These chairs would never pass the calibration step, although without calibration they appear as spurious readings.
 
-Another issue with OpenNI is that by default, the software tracks the entire human body (head, arms, torso, and legs).  Harlie's Kinect iss mounted in such a way that it cannot see legs close up (INSERT MECHANICAL DRAWING OF KINECT'S FOV).  Luckily, the NITE software can be commanded to ignore legs and just track the target's upper torso.  However, there is a tradeoff, because without legs, the tracking software loses an important characteristic that can discriminate people from inanimate objects.
-
-
-
+Another issue with OpenNI is that by default, the software tracks the entire human body (head, arms, torso, and legs).  Harlie's Kinect is mounted in such a way that it cannot see legs close up (INSERT MECHANICAL DRAWING OF KINECT'S FOV).  Luckily, the NITE software can be commanded to ignore legs and just track the target's upper torso.  However, there is a tradeoff, because without legs, the tracking software loses an important characteristic that can discriminate people from inanimate objects.
 
 DISCRIMINTATION BETWEEN USERS
 
-The Kinect has no built-in facilities for discriminating between users.  No information is stored about a user other than calibration measurements representing limb lengths.  If a user exits the scene, there is no guarantee that when the user is re-detected that user will be assigned the same ID.  The same is true if a target is momentarilly lost.  If the target is moving and the Kinect encounters a sudden jolt, the target will likely be lost and it may be reacquired with a new ID.  My solution was to use the Kinect as one of several inputs to a Kalman filter that tracks the overall hypothesized location of a person (to be discussed in a later section.)
+The Kinect has no built-in facilities for discriminating between users.  No information is stored about a user other than calibration measurements representing limb lengths.  By default, the Kinect likely relies on continuity between frames to maintain a lock.
 
+If a user exits the scene, there is no guarantee that when the user is re-detected that user will be assigned the same ID.  The same is true if a target is momentarilly lost.  If the target is moving and the Kinect encounters a sudden jolt, the target will likely be lost and it may be reacquired with a new ID.  
 
-For , especially the problem of dealing with users entering and leaving the scene, had to be overcome.
-
-
-
-I hypothesize that the Kinect has a reliance on background subtraction. 
-
-The Kinect cannot easily acquire moving targets.
-
-a smoothing factor (one of the few user accessable parameters)
-
-The Kinect is interfaced through OpenNI (Open Natural Interraction) drivers which provide an open-source API.  However, the skeleton tracking itself is done in a closed source binary (NITE, made by PrimeSense.)  Therefore little can be done to improve the dropout rate on moving targets.
-
-
-
+My solution was to use the Kinect as one of several inputs to a Kalman filter that tracks the overall hypothesized location of a person (to be discussed in a later section.)
 
 LIMITED FIELD OF VIEW
 
@@ -47,9 +29,6 @@ When using the Kinect as the sole source of observation, the robot must constant
 Even following a target down a straignt hall one can run into problems.  If an obstacle appears between the user and the robot, the robot will have to navigate around the obstacle. (INSERT IMAGE HERE OF ROBOT AVOIDING OBSTACLE, INCLUDING TANGENT ANGLE DEVIATION FROM STRAIGHT PATH) Likely, as part of the avoidance the user will leave the Kinect's field of view, leading to a target loss.  When the robot once again faces the user, it will have to re-find the user.
 
 The situation becomes worse when the user takes a twisting path, especially doubling back behind the robot.  In tight spaces such as hallways, the user will necessarily come close to Harlie when moving behind it.  Because the Kinect cannot track targets closer than two feet away, this frequently leads to target loss.  Additionally, the robot can get stuck against a wall with no hope of recovery.
-
-
-
 
 MOVING BASE PROBLEM
 
@@ -65,6 +44,10 @@ As the maximum speed increases, performance starts to degrade.  Around 0.5 radia
 The quality of target tracking is also dependent on the environment.  The Kinect is able to track closer users more reliably, likely because they have a greater number of constituent pixels.  Occluded users are more dificult to track, especially if the occluding object is close by [INSERT PICTURE OF CHAIR BEING INTERPRETED AS BODY PART].
 
 All of these effects are dependent on speed.  Even so, at the maximum tested speed of 0.8 radian/second, the Kinect performed remarkably well given that it is operating outside of its design parameters.  Although it frequently loses a lock, it is usually able to reacquire.
+
+Nevertheless, the problems are significant enough to warrant addressing.
+
+Relative motion is a more significant problem than absolute motion.  If the target keeps pace with the robot's rotation to remain in the center of the Kinect's FOV, tracking is very accurate.
 
 Targets further away from the Kinect
 I hypothesize that the Kinect uses background subtraction and tracks users frame-to-frame.  Tracking is a more difficult problem when the base is moving.  If the 
