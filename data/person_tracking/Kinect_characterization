@@ -1,15 +1,30 @@
-The Kinect has several disadvantages that had to be overcome, largely due to the closed-source nature of the skeleton-tracking software.  The Kinect has a limited field of view (57 degrees).  The Kinect was designed to track users from a fixed vantage point.  The Kinect is sensitive to vibration.  The Kinect does not work well in direct sunlight (vibration)
+The Kinect has several disadvantages that had to be overcome, largely due to the closed-source nature of the skeleton-tracking software.  The Kinect has a limited field of view (57 degrees).  The Kinect was designed to track users from a fixed vantage point.  The Kinect is sensitive to vibration.  The Kinect does not work well in direct sunlight.
+
+The Kinect is accessed through an open-source API called OpenNI (Open Natural Interraction).  However, the actual skeleton tracking is done by a closed-source binary (NITE, made by PrimeSense.)  NITE provides few options for configuration, so at times software workarounds had to be employed.
+
+
+
+
+CALIBRATION
+
+By default, whenever OpenNI detects a new user in its field of view it requires the user to stand in a calibration pose [PICTURE] to take an accurate measure of the user's limbs.  This calibration step takes several seconds and requires the target to be still.
+
+When the Kinect is on a moving base, occasionally the target will be lost due to relative motion or jolts (as discussed later).  Upon target reacquisition, recalibration would frequently be required.  Recalibration woudl require both Harlie and the target to come to a halt, which is unacceptable given the goal of smoothly following the target.  Luckily, through somewhat of a hack, OpenNI can be instructed to save the calibration of the first detected user, and for all subsequent users skip calibration and just use the saved calibration.
+
+Skipping calibration comes at a cost.  A positive aspect of the calibration step is that the distinctive pose required for calibration eliminates the problem of the robot following the wrong user.  Without calibration, the robot no longer has an easy way of telling which user to follow.  Additionally, when on a moving base, the Kinect tends to detect chairs as users.  These chairs would never pass the calibration step, although without calibration they appear as spurious readings.
+
+Another issue with OpenNI is that by default, the software tracks the entire human body (head, arms, torso, and legs).  Harlie's Kinect iss mounted in such a way that it cannot see legs close up (INSERT MECHANICAL DRAWING OF KINECT'S FOV).  Luckily, the NITE software can be commanded to ignore legs and just track the target's upper torso.  However, there is a tradeoff, because without legs, the tracking software loses an important characteristic that can discriminate people from inanimate objects.
+
 
 
 
 DISCRIMINTATION BETWEEN USERS
 
+The Kinect has no built-in facilities for discriminating between users.  No information is stored about a user other than calibration measurements representing limb lengths.  If a user exits the scene, there is no guarantee that when the user is re-detected that user will be assigned the same ID.  The same is true if a target is momentarilly lost.  If the target is moving and the Kinect encounters a sudden jolt, the target will likely be lost and it may be reacquired with a new ID.  My solution was to use the Kinect as one of several inputs to a Kalman filter that tracks the overall hypothesized location of a person (to be discussed in a later section.)
 
-The Kinect has no built-in facilities for discriminating between users.  
 
-If a user exits the scene, there is no guarantee that when the user is re-detected that user will be assigned the same ID.  The same is true if a target is momentarilly lost.  If the target is moving and the Kinect encounters a sudden jolt, the target will likely be lost, and it may be reacquired with a new ID.
+For , especially the problem of dealing with users entering and leaving the scene, had to be overcome.
 
-Usually, as part of acquiring a new user, the Kinect will require calibration, in which the user stands in a 'Y' shape [PICTURE] so that their limbs can be mesaured.  The calibration step takes several seconds, and requires both the target and the Kinect to be still, which is problematic.  Luckily, the software can be instructed to skip calibration and just load a pre-saved calibration.
 
 
 I hypothesize that the Kinect has a reliance on background subtraction. 
@@ -19,13 +34,6 @@ The Kinect cannot easily acquire moving targets.
 a smoothing factor (one of the few user accessable parameters)
 
 The Kinect is interfaced through OpenNI (Open Natural Interraction) drivers which provide an open-source API.  However, the skeleton tracking itself is done in a closed source binary (NITE, made by PrimeSense.)  Therefore little can be done to improve the dropout rate on moving targets.
-
-
-
-
-
-
-Harlie's Kinect was mounted in such a way that it cannot see legs (INSERT MECHANICAL DRAWING OF KINECT'S FOV) close up.  Luckily, the NITE software can be commanded to ignore legs and just track the target's upper torso.  The problem is that without legs, the tracking software loses an important characteristic that can discriminate people from inanimate objects.
 
 
 
@@ -58,14 +66,6 @@ The quality of target tracking is also dependent on the environment.  The Kinect
 
 All of these effects are dependent on speed.  Even so, at the maximum tested speed of 0.8 radian/second, the Kinect performed remarkably well given that it is operating outside of its design parameters.  Although it frequently loses a lock, it is usually able to reacquire.
 
-
-
-
-
 Targets further away from the Kinect
 I hypothesize that the Kinect uses background subtraction and tracks users frame-to-frame.  Tracking is a more difficult problem when the base is moving.  If the 
 
-
-
-
-back and forth through 1 radian (approximately the Kinect's field of view) with a sinusoidal velocity profile and a top speed of 0.8 rad/sec (46 degrees/second).

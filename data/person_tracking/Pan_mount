@@ -1,0 +1,7 @@
+To alleviate some issues inherent with the Kinect (limited field of view, moving base) it was decided to build a rotating mount to allow the Kinect to face its target.
+
+The ServoCity DDP155 Base Pan was selected.  The DP155 is a low-cost, direct-drive pan mount that encorporates a standard servo.[INSERT PICTURE]  The DP155 has a ball-bering shaft that makes the pan head extremely rigid, reducing axial stresses on the servo.  The GET NAME hobby servo was selected.
+
+An Arduino was considered because of their wide hobbyist support.
+
+To drive the servo, the 1066_0 PhidgetAdvancedServo 1-Motor was selected.  The Phidgets 1066_0 allows precise open-loop control of a hobby servo, obeying constraints on velocity and acceleration.  Phidgets also provides a convenient C API to can command rotation angles and change options.  The device is completely powered by a USB port, and provides real-time feedback on current consumption, as well as open-loop feedback on position and velocity.
