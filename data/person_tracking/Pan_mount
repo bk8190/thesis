@@ -4,4 +4,6 @@ The ServoCity DDP155 Base Pan was selected.  The DP155 is a low-cost, direct-dri
 
 An Arduino was considered because of their wide hobbyist support.
 
-To drive the servo, the 1066_0 PhidgetAdvancedServo 1-Motor was selected.  The Phidgets 1066_0 allows precise open-loop control of a hobby servo, obeying constraints on velocity and acceleration.  Phidgets also provides a convenient C API to can command rotation angles and change options.  The device is completely powered by a USB port, and provides real-time feedback on current consumption, as well as open-loop feedback on position and velocity.
+To drive the servo, the 1066_0 PhidgetAdvancedServo 1-Motor was selected.  The Phidgets 1066_0 allows precise open-loop control of a hobby servo at 30 Hz, obeying constraints on velocity and acceleration.  Phidgets also provides a convenient C API to can command rotation angles and change options.  The device is completely powered by a USB port, and provides real-time feedback on current consumption as well as open-loop feedback on position and velocity.
+
+The TF (transform) API of ROS was used to take care of the time-varying transform between the Kinect and the rest of the robot.  A node subscribes to a position from the person tracker, transforms it to coordinates relative to Harlie's base frame, and publishes a target angle.  The head controller subscribes to this angle and   .  [INSERT FIGURE] 
