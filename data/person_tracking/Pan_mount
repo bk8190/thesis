@@ -10,3 +10,7 @@ The performance of the pan mount was characterized.  The face detector node (exp
 
 
 [Go more into detail about the choice of positioning, and why pan instead of pan/tilt was chosen]
+
+[Precision not required - person tracking can deal with 1-2 feet of error]
+
+[Future work - more precise calibration]
