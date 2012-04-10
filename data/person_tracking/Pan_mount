@@ -7,3 +7,6 @@ To drive the servo, the 1066_0 PhidgetAdvancedServo 1-Motor was selected.  The P
 The TF (transform) API of ROS was used to take care of the time-varying transform between the Kinect and the rest of the robot.  A node subscribes to a position from the person tracker, transforms it to coordinates relative to Harlie's base frame, and publishes a target angle.  The head controller subscribes to this angle and communicates with the Phidget 1066_0 and publishes a transform incorporating the open-loop feedback. [INSERT FIGURE]
 
 The performance of the pan mount was characterized.  The face detector node (explained later) was run with a stationary person 1m away from the Kinect.  The pan head was moved back and forth.  If the pan head worked perfectly, the face would be detected in the same spot no matter the position or velocity of the pan head. [GET DATA AND INSERT FIGURE]
+
+
+[Go more into detail about the choice of positioning, and why pan instead of pan/tilt was chosen]
