@@ -1,6 +1,6 @@
 clear all;close all;
 
-data = load('face_dataset_2');
+data = load('face_dataset_3');
 
 means = mean(data);
 norm(:,1) = data(:,1) - means(1);
