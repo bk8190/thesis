@@ -14,3 +14,5 @@ The performance of the pan mount was characterized.  The face detector node (exp
 [Precision not required - person tracking can deal with 1-2 feet of error]
 
 [Future work - more precise calibration]
+
+[even with pan compensation, bumps still throw me off, anti-vibration mount future work?]
