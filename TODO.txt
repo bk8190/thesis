@@ -7,3 +7,19 @@ Illustrate path that Harlie took along with path of leader
 
 Mention Eric Perko's precision steering - citation
 Chad's thesis - citation
+
+
+In simulation - move target around, make sure Harlie doesn't stop
+- moving target
+- while moving, Harlie has to make patches to the original plan to avoid obstacles
+
+
+- Record how long replanning takes
+- Run the test and see how long it takes
+- Start off with few obstacles, increase them
+
+Is it OK to refer to Harlie as "he?"
+
+Frank Merat
+Cenk C
+Greg Lee
