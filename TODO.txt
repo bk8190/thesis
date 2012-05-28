@@ -1,15 +1,9 @@
-Citations in IEEE - 30ish total
-~80 pages is normal
-
-Mention Eric Perko's precision steering - citation
-Chad's thesis - citation
-- name, title, M.S. thesis EECS department Janurary 2012
-
-Is it OK to refer to Harlie as "he?"
-
-Cenk Cavusoglu
-Greg Lee
-
 - Think about audience, be more educational in tone
 - How can I build it, repeat it
 - Pitfalls, non-obvious things
+
+
+Before handing in:
+Title page
+Acknowledgements
+Adjust margins on bibliography (auto-format is wrong)
