@@ -1,9 +1,5 @@
-Redo path figures
-
 Make new mounting bracket for Kinect
 
 Before handing in:
-Title page
-Acknowledgements
 Adjust margins on bibliography (auto-format is wrong)
 Watch for bad page breaks
