@@ -1,9 +1,5 @@
-- Think about audience, be more educational in tone
-- How can I build it, repeat it
-- Pitfalls, non-obvious things
-
+Make new mounting bracket for Kinect
 
 Before handing in:
-Title page
-Acknowledgements
 Adjust margins on bibliography (auto-format is wrong)
+Watch for bad page breaks
